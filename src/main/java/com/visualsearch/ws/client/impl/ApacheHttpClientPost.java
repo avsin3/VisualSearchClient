@@ -1,3 +1,4 @@
+package com.visualsearch.ws.client.impl;
 /*package com.mkyong.rest.client;
 
 import java.io.BufferedReader;

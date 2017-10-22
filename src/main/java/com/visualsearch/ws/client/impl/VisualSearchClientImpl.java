@@ -1,4 +1,4 @@
-package com.mkyong.rest.client;
+package com.visualsearch.ws.client.impl;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
