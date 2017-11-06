@@ -4,15 +4,14 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-public class VisualSearchClientImpl {
+public class VisualSearchWSClientImpl {
 
 	public static void main(String[] args) {
 		try {
 
 			Client client = Client.create();
 
-			WebResource webResource = client
-					.resource("http://localhost:8080/VisualSearch/search/searchByImage/malm100");
+			WebResource webResource = client.resource("http://localhost:8080/VisualSearch/search/imageSearch/malm100");
 
 			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 

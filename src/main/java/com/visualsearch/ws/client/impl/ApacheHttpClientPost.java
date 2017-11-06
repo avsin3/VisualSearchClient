@@ -1,59 +1,43 @@
 package com.visualsearch.ws.client.impl;
-/*package com.mkyong.rest.client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
+import java.io.UnsupportedEncodingException;
+
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 public class ApacheHttpClientPost {
 
 	// http://localhost:8080/RESTfulExample/json/product/post
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException {try {
 
-		try {
+		Client client = Client.create();
 
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpPost postRequest = new HttpPost(
-					"http://localhost:8080/RESTfulExample/json/product/post");
+		WebResource webResource = client
+		   .resource("http://localhost:8080/VisualSearch/search/imageSearch/searchByImage");
 
-			StringEntity input = new StringEntity(
-					"{\"qty\":100,\"name\":\"iPad 4\"}");
-			input.setContentType("application/json");
-			postRequest.setEntity(input);
+		String input = "C:/Users/Public/Pictures/Sample Pictures/Penguins.jpg";
 
-			HttpResponse response = httpClient.execute(postRequest);
+		ClientResponse response = webResource.type("application/json")
+		   .post(ClientResponse.class, input.getBytes());
 
-			if (response.getStatusLine().getStatusCode() != 201) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatusLine().getStatusCode());
-			}
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					(response.getEntity().getContent())));
-
-			String output;
-			System.out.println("Output from Server .... \n");
-			while ((output = br.readLine()) != null) {
-
-				System.out.println(output);
-			}
-
-			httpClient.getConnectionManager().shutdown();
-
-		} catch (MalformedURLException e) {
-
-			e.printStackTrace();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
+		if (response.getStatus() != 201) {
+			throw new RuntimeException("Failed : HTTP error code : "
+			     + response.getStatus());
 		}
+
+		System.out.println("Output from Server .... \n");
+		String output = response.getEntity(String.class);
+		System.out.println(output);
+
+	  } catch (Exception e) {
+
+		e.printStackTrace();
+
+	  }
 
 	}
 
-}*/
+}
